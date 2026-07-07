@@ -1,9 +1,11 @@
 <div id="pro-passport">
 
-<h2>📸 Passport Photo Maker</h2>
+<h2><svg viewBox="0 0 24 24" width="22" height="22" style="vertical-align:-4px;margin-right:6px;"><path fill="currentColor" d="M9 2L7.17 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2h-3.17L15 2H9zm3 15a5 5 0 110-10 5 5 0 010 10zm0-2a3 3 0 100-6 3 3 0 000 6z"/></svg>Passport Photo Maker</h2>
 
 <div class="pp-row">
-  <label class="pp-upload-label" for="upload">📁 Upload Photo</label>
+  <label class="pp-upload-label" for="upload">
+    <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:-3px;margin-right:6px;"><path fill="currentColor" d="M5 20h14v-2H5v2zM12 2L6 8h4v6h4V8h4l-6-6z"/></svg>Upload Photo
+  </label>
   <input type="file" id="upload" accept="image/*">
 </div>
 
@@ -38,10 +40,10 @@
     <div class="pp-inline">
       <input type="color" id="bg" value="#ffffff">
       <div class="pp-swatches">
-        <button type="button" class="pp-swatch" style="background:#ffffff" data-color="#ffffff" title="White"></button>
-        <button type="button" class="pp-swatch" style="background:#e9edf5" data-color="#e9edf5" title="Light Grey"></button>
-        <button type="button" class="pp-swatch" style="background:#dbe9ff" data-color="#dbe9ff" title="Light Blue"></button>
-        <button type="button" class="pp-swatch" style="background:#ff0000" data-color="#ff0000" title="Red"></button>
+        <button type="button" class="pp-swatch" style="background:#ffffff;" data-color="#ffffff" title="White"></button>
+        <button type="button" class="pp-swatch" style="background:#e9edf5;" data-color="#e9edf5" title="Light Grey"></button>
+        <button type="button" class="pp-swatch" style="background:#dbe9ff;" data-color="#dbe9ff" title="Light Blue"></button>
+        <button type="button" class="pp-swatch" style="background:#ff0000;" data-color="#ff0000" title="Red"></button>
       </div>
     </div>
   </div>
@@ -89,12 +91,24 @@
 </div>
 
 <div class="pp-controls">
-  <button type="button" onclick="rotate(-90)">↺ Rotate Left</button>
-  <button type="button" onclick="rotate(90)">↻ Rotate Right</button>
-  <button type="button" onclick="flipH()">⇋ Flip H</button>
-  <button type="button" onclick="flipV()">⇵ Flip V</button>
-  <button type="button" onclick="toggleErase()" id="eraseBtn">🧽 Eraser: OFF</button>
-  <button type="button" onclick="resetAll()">🔄 Reset</button>
+  <button type="button" onclick="rotate(-90)">
+    <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M12.5 3a9 9 0 108.94 8H19.4a7 7 0 11-2-5.4L15 8h7V1l-2.6 2.6A9 9 0 0012.5 3z"/></svg> Rotate Left
+  </button>
+  <button type="button" onclick="rotate(90)">
+    <svg viewBox="0 0 24 24" width="15" height="15" style="transform:scaleX(-1);"><path fill="currentColor" d="M12.5 3a9 9 0 108.94 8H19.4a7 7 0 11-2-5.4L15 8h7V1l-2.6 2.6A9 9 0 0012.5 3z"/></svg> Rotate Right
+  </button>
+  <button type="button" onclick="flipH()">
+    <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M12 3v18M5 8l-3 4 3 4M19 8l3 4-3 4"/><path fill="currentColor" d="M12 3v18"/></svg> Flip H
+  </button>
+  <button type="button" onclick="flipV()">
+    <svg viewBox="0 0 24 24" width="15" height="15" style="transform:rotate(90deg);"><path fill="currentColor" d="M12 3v18M5 8l-3 4 3 4M19 8l3 4-3 4"/></svg> Flip V
+  </button>
+  <button type="button" onclick="toggleErase()" id="eraseBtn">
+    <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M16.24 3.56l4.2 4.2a2 2 0 010 2.82l-8.49 8.49H6.34L2.7 15.44a2 2 0 010-2.83l8.7-8.7a2 2 0 012.84-.35zM8.5 17.5l-2-2"/></svg> Eraser: OFF
+  </button>
+  <button type="button" onclick="resetAll()">
+    <svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M17.65 6.35A8 8 0 106.35 17.65 8 8 0 0017.65 6.35zM13 8l4-3v6l-4-3zM11 16l-4 3v-6l4 3z" opacity="0"/><path fill="currentColor" d="M12 4V1L8 5l4 4V6a6 6 0 11-6 6H4a8 8 0 108-8z"/></svg> Reset
+  </button>
 </div>
 
 <canvas id="canvas"></canvas>
@@ -120,181 +134,226 @@
 </div>
 
 <div class="pp-controls">
-  <button type="button" onclick="download()" class="pp-primary">⬇️ Download Photo</button>
+  <button type="button" onclick="download()" class="pp-primary">
+    <svg viewBox="0 0 24 24" width="16" height="16" style="vertical-align:-3px;margin-right:6px;"><path fill="currentColor" d="M5 20h14v-2H5v2zM13 10V2h-2v8H7l5 6 5-6h-4z"/></svg>Download Photo
+  </button>
 </div>
 
 </div>
 
 <style>
+#pro-passport, #pro-passport *{
+  box-sizing:border-box !important;
+}
+
 #pro-passport{
   --pp-accent:#6228e6;
   --pp-accent-dark:#4b1cb5;
   --pp-text:#22213a;
   --pp-bg:#ffffff;
-  background:var(--pp-bg);
-  padding:22px;
-  border-radius:15px;
-  max-width:560px;
-  margin:auto;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
-  font-family:sans-serif;
-  text-align:center;
-  box-sizing:border-box;
+  background:var(--pp-bg) !important;
+  padding:22px !important;
+  border-radius:15px !important;
+  max-width:560px !important;
+  width:100% !important;
+  margin:0 auto !important;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1) !important;
+  font-family:sans-serif !important;
+  text-align:center !important;
+  line-height:normal !important;
 }
-#pro-passport *{box-sizing:border-box;}
 
 #pro-passport h2{
-  color:var(--pp-accent);
-  margin:0 0 15px 0;
-  font-size:22px;
+  color:var(--pp-accent) !important;
+  margin:0 0 15px 0 !important;
+  font-size:22px !important;
+  font-weight:700 !important;
+  line-height:1.3 !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
 }
 
 #pro-passport label{
-  color:var(--pp-text);
-  font-size:13px;
-  font-weight:600;
-  display:block;
-  margin-bottom:4px;
-  text-align:left;
+  color:var(--pp-text) !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  display:block !important;
+  margin:0 0 4px 0 !important;
+  text-align:left !important;
+  background:none !important;
 }
 
 #pro-passport select,
 #pro-passport input[type="number"]{
-  width:100%;
-  padding:8px;
-  border-radius:8px;
-  border:1px solid #ddd;
-  font-size:14px;
-  color:var(--pp-text);
-  background:#fafafa;
+  width:100% !important;
+  height:auto !important;
+  padding:8px !important;
+  border-radius:8px !important;
+  border:1px solid #ddd !important;
+  font-size:14px !important;
+  color:var(--pp-text) !important;
+  background:#fafafa !important;
+  appearance:auto;
+  margin:0 !important;
+  line-height:normal !important;
 }
 
 #pro-passport input[type="color"]{
-  width:44px;
-  height:36px;
-  border:1px solid #ddd;
-  border-radius:8px;
-  padding:2px;
-  background:#fafafa;
-  cursor:pointer;
+  -webkit-appearance:none !important;
+  appearance:none !important;
+  width:44px !important;
+  height:36px !important;
+  min-width:44px !important;
+  flex:0 0 44px !important;
+  border:1px solid #ddd !important;
+  border-radius:8px !important;
+  padding:2px !important;
+  background:#fafafa !important;
+  cursor:pointer !important;
+  margin:0 !important;
 }
+#pro-passport input[type="color"]::-webkit-color-swatch-wrapper{padding:0 !important;}
+#pro-passport input[type="color"]::-webkit-color-swatch{border:none !important;border-radius:6px !important;}
 
 #pro-passport input[type="file"]{
-  display:none;
+  display:none !important;
 }
 
-.pp-upload-label{
-  display:inline-block;
-  background:var(--pp-accent);
-  color:#fff !important;
-  padding:10px 18px;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:600;
-  font-size:14px;
-  margin-bottom:10px;
+#pro-passport .pp-upload-label{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:var(--pp-accent) !important;
+  color:#ffffff !important;
+  padding:11px 18px !important;
+  border-radius:8px !important;
+  cursor:pointer !important;
+  font-weight:600 !important;
+  font-size:14px !important;
+  margin:0 0 10px 0 !important;
+  width:100% !important;
+  border:none !important;
 }
-.pp-upload-label:hover{background:var(--pp-accent-dark);}
+#pro-passport .pp-upload-label:hover{background:var(--pp-accent-dark) !important;}
+#pro-passport .pp-upload-label svg{fill:#ffffff !important;}
 
-.pp-row{margin-bottom:10px;}
+#pro-passport .pp-row{margin:0 0 12px 0 !important;}
 
-.pp-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-bottom:12px;
-  text-align:left;
-}
-
-.pp-field{min-width:0;}
-
-.pp-inline{
-  display:flex;
-  align-items:center;
-  gap:8px;
+#pro-passport .pp-grid{
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:12px !important;
+  margin:0 0 12px 0 !important;
+  text-align:left !important;
 }
 
-.pp-custom-size{grid-column:1 / -1;}
+#pro-passport .pp-field{min-width:0 !important; margin:0 !important;}
 
-.pp-swatches{
-  display:flex;
-  gap:6px;
-}
-
-.pp-swatch{
-  width:26px;
-  height:26px;
-  border-radius:50%;
-  border:2px solid #ddd;
-  cursor:pointer;
-  padding:0;
+#pro-passport .pp-inline{
+  display:flex !important;
+  align-items:center !important;
+  gap:8px !important;
+  flex-wrap:nowrap !important;
 }
 
-.pp-sliders{
-  margin-top:5px;
-  text-align:left;
-}
-.pp-sliders label{
-  font-size:12px;
-  color:#555;
-  margin-top:8px;
-  display:flex;
-  justify-content:space-between;
-}
-.pp-sliders input[type="range"]{
-  width:100%;
-  accent-color:var(--pp-accent);
+#pro-passport .pp-custom-size{grid-column:1 / -1 !important;}
+
+#pro-passport .pp-swatches{
+  display:flex !important;
+  align-items:center !important;
+  gap:6px !important;
+  flex:1 1 auto !important;
 }
 
-canvas{
-  width:100%;
-  max-width:100%;
-  height:auto;
-  border:2px dashed #ddd;
-  margin-top:15px;
-  touch-action:none;
-  border-radius:8px;
-  background:#f5f5f5;
+#pro-passport button.pp-swatch{
+  width:24px !important;
+  height:24px !important;
+  min-width:24px !important;
+  max-width:24px !important;
+  flex:0 0 24px !important;
+  border-radius:50% !important;
+  border:2px solid #ddd !important;
+  cursor:pointer !important;
+  padding:0 !important;
+  margin:0 !important;
+}
+#pro-passport button.pp-swatch:hover{border-color:var(--pp-accent) !important;}
+
+#pro-passport .pp-sliders{
+  margin:5px 0 0 0 !important;
+  text-align:left !important;
+}
+#pro-passport .pp-sliders label{
+  font-size:12px !important;
+  font-weight:600 !important;
+  color:#555 !important;
+  margin:10px 0 4px 0 !important;
+  display:flex !important;
+  justify-content:space-between !important;
+}
+#pro-passport .pp-sliders input[type="range"]{
+  width:100% !important;
+  accent-color:var(--pp-accent) !important;
+  margin:0 !important;
 }
 
-.pp-hint{
-  font-size:12px;
-  color:#888;
-  margin:8px 0 0 0;
+#pro-passport canvas{
+  width:100% !important;
+  max-width:100% !important;
+  height:auto !important;
+  display:block !important;
+  border:2px dashed #ddd !important;
+  margin:15px auto 0 auto !important;
+  touch-action:none !important;
+  border-radius:8px !important;
+  background:#f5f5f5 !important;
 }
 
-.pp-controls{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:center;
-  margin-top:14px;
+#pro-passport .pp-hint{
+  font-size:12px !important;
+  color:#888 !important;
+  margin:8px 0 0 0 !important;
 }
 
-#pro-passport button{
-  padding:10px 14px;
-  border:none;
-  background:var(--pp-accent);
-  color:#fff !important;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:600;
-  flex:1 1 auto;
-  min-width:110px;
-  transition:background .15s ease;
+#pro-passport .pp-controls{
+  display:flex !important;
+  gap:10px !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  margin:14px 0 0 0 !important;
 }
-#pro-passport button:hover{background:var(--pp-accent-dark);}
 
-#pro-passport button.pp-primary{
-  background:#0fae5f;
-  min-width:200px;
+#pro-passport .pp-controls button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:5px !important;
+  padding:10px 14px !important;
+  border:none !important;
+  background:var(--pp-accent) !important;
+  color:#ffffff !important;
+  border-radius:8px !important;
+  cursor:pointer !important;
+  font-size:13px !important;
+  font-weight:600 !important;
+  flex:1 1 auto !important;
+  min-width:110px !important;
+  margin:0 !important;
+  transition:background .15s ease !important;
 }
-#pro-passport button.pp-primary:hover{background:#0c8c4c;}
+#pro-passport .pp-controls button svg{fill:#ffffff !important;flex-shrink:0 !important;}
+#pro-passport .pp-controls button:hover{background:var(--pp-accent-dark) !important;}
+
+#pro-passport .pp-controls button.pp-primary{
+  background:#0fae5f !important;
+  min-width:200px !important;
+}
+#pro-passport .pp-controls button.pp-primary:hover{background:#0c8c4c !important;}
 
 @media(max-width:600px){
-  .pp-grid{grid-template-columns:1fr;}
-  #pro-passport button{width:100%;}
+  #pro-passport .pp-grid{grid-template-columns:1fr !important;}
+  #pro-passport .pp-controls button{width:100% !important;}
 }
 </style>
 
@@ -317,7 +376,6 @@ let isDragging = false;
 let dragStartX = 0, dragStartY = 0;
 let eraseMode = false;
 
-// eraser strokes stored so they survive redraws (applied after image draw)
 let eraseStrokes = [];
 
 const sizesMM = {
@@ -332,18 +390,16 @@ const sizesMM = {
 };
 
 function mmToPx(mm){
-  return Math.round((mm/25.4)*300); // 300 DPI
+  return Math.round((mm/25.4)*300);
 }
 
 function getCanvasSize(){
   let sizeKey = document.getElementById("size").value;
-
   if(sizeKey === "custom"){
     let w = parseFloat(document.getElementById("customW").value) || 35;
     let h = parseFloat(document.getElementById("customH").value) || 45;
     return [mmToPx(w), mmToPx(h)];
   }
-
   let s = sizesMM[sizeKey];
   if(s.isPx) return [s.w, s.h];
   return [mmToPx(s.wmm), mmToPx(s.hmm)];
@@ -363,7 +419,6 @@ document.getElementById("upload").onchange = e=>{
     img.src = evt.target.result;
     img.onload = ()=>{
       hasImage = true;
-      scale = 1;
       rotation = 0;
       flipXState = 1;
       flipYState = 1;
@@ -371,9 +426,10 @@ document.getElementById("upload").onchange = e=>{
       let [w,h] = getCanvasSize();
       posX = w/2;
       posY = h/2;
-      // auto-fit image to cover canvas initially
       let coverScale = Math.max(w/img.width, h/img.height);
       scale = coverScale;
+      document.getElementById("zoomSlider").value = 100;
+      document.getElementById("zoomVal").textContent = "100%";
       draw();
     };
   };
@@ -404,7 +460,6 @@ function draw(){
 
     ctx.filter = "none";
 
-    // replay eraser strokes (reveal background color beneath)
     if(eraseStrokes.length){
       ctx.save();
       ctx.fillStyle = document.getElementById("bg").value;
@@ -422,7 +477,6 @@ function draw(){
     ctx.fillText("Upload a photo to begin", w/2, h/2);
   }
 
-  // face guide overlay
   if(document.getElementById("guideToggle").value === "1"){
     ctx.save();
     ctx.strokeStyle = "rgba(98,40,230,0.6)";
@@ -431,7 +485,6 @@ function draw(){
     ctx.beginPath();
     ctx.ellipse(w/2, h*0.45, w*0.28, h*0.33, 0, 0, Math.PI*2);
     ctx.stroke();
-    // shoulder line guide
     ctx.beginPath();
     ctx.moveTo(w*0.15, h*0.85);
     ctx.lineTo(w*0.85, h*0.85);
@@ -439,7 +492,6 @@ function draw(){
     ctx.restore();
   }
 
-  // border
   let b = parseInt(document.getElementById("border").value, 10);
   if(b > 0){
     ctx.strokeStyle = document.getElementById("borderColor").value;
@@ -450,7 +502,6 @@ function draw(){
   ctx.restore();
 }
 
-// ---- pointer helpers (mouse + touch unified) ----
 function getPointerPos(e){
   let rect = canvas.getBoundingClientRect();
   let scaleX = canvas.width / rect.width;
@@ -490,9 +541,7 @@ function pointerMove(e){
   }
 }
 
-function pointerUp(){
-  isDragging = false;
-}
+function pointerUp(){ isDragging = false; }
 
 function eraseAt(x,y){
   let r = parseInt(document.getElementById("brushSize").value, 10);
@@ -503,52 +552,40 @@ function eraseAt(x,y){
 canvas.addEventListener("mousedown", pointerDown);
 canvas.addEventListener("mousemove", pointerMove);
 window.addEventListener("mouseup", pointerUp);
-
 canvas.addEventListener("touchstart", pointerDown, {passive:false});
 canvas.addEventListener("touchmove", pointerMove, {passive:false});
 canvas.addEventListener("touchend", pointerUp);
 
-// ---- controls ----
-window.rotate = function(deg){
-  rotation += deg;
-  draw();
-};
-
-window.flipH = function(){
-  flipXState *= -1;
-  draw();
-};
-
-window.flipV = function(){
-  flipYState *= -1;
-  draw();
-};
+window.rotate = function(deg){ rotation += deg; draw(); };
+window.flipH = function(){ flipXState *= -1; draw(); };
+window.flipV = function(){ flipYState *= -1; draw(); };
 
 window.toggleErase = function(){
   eraseMode = !eraseMode;
-  document.getElementById("eraseBtn").textContent = eraseMode ? "🧽 Eraser: ON" : "🧽 Eraser: OFF";
+  document.getElementById("eraseBtn").innerHTML =
+    '<svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M16.24 3.56l4.2 4.2a2 2 0 010 2.82l-8.49 8.49H6.34L2.7 15.44a2 2 0 010-2.83l8.7-8.7a2 2 0 012.84-.35zM8.5 17.5l-2-2"/></svg> ' +
+    (eraseMode ? "Eraser: ON" : "Eraser: OFF");
 };
 
 window.resetAll = function(){
-  scale = 1;
   rotation = 0;
   flipXState = 1;
   flipYState = 1;
   eraseStrokes = [];
   eraseMode = false;
-  document.getElementById("eraseBtn").textContent = "🧽 Eraser: OFF";
+  document.getElementById("eraseBtn").innerHTML =
+    '<svg viewBox="0 0 24 24" width="15" height="15"><path fill="currentColor" d="M16.24 3.56l4.2 4.2a2 2 0 010 2.82l-8.49 8.49H6.34L2.7 15.44a2 2 0 010-2.83l8.7-8.7a2 2 0 012.84-.35zM8.5 17.5l-2-2"/></svg> Eraser: OFF';
   if(hasImage){
     let [w,h] = getCanvasSize();
     posX = w/2;
     posY = h/2;
-    let coverScale = Math.max(w/img.width, h/img.height);
-    scale = coverScale;
+    scale = Math.max(w/img.width, h/img.height);
     document.getElementById("zoomSlider").value = 100;
+    document.getElementById("zoomVal").textContent = "100%";
   }
   draw();
 };
 
-// zoom slider
 document.getElementById("zoomSlider").oninput = function(){
   if(!hasImage) return;
   let [w,h] = getCanvasSize();
@@ -558,13 +595,11 @@ document.getElementById("zoomSlider").oninput = function(){
   draw();
 };
 
-// live value labels
 document.getElementById("bright").oninput = function(){document.getElementById("brightVal").textContent=this.value+"%"; draw();};
 document.getElementById("contrast").oninput = function(){document.getElementById("contrastVal").textContent=this.value+"%"; draw();};
 document.getElementById("sat").oninput = function(){document.getElementById("satVal").textContent=this.value+"%"; draw();};
 document.getElementById("brushSize").oninput = function(){document.getElementById("brushVal").textContent=this.value+"px";};
 
-// swatches
 document.querySelectorAll(".pp-swatch").forEach(sw=>{
   sw.onclick = function(){
     document.getElementById("bg").value = this.dataset.color;
@@ -572,15 +607,13 @@ document.querySelectorAll(".pp-swatch").forEach(sw=>{
   };
 });
 
-// general inputs that should redraw
 ["bg","border","borderColor","guideToggle","customW","customH"].forEach(id=>{
   document.getElementById(id).addEventListener("input", draw);
 });
 
-// ---- download / sheet builder ----
 function buildSheet(layoutKey, photoCanvas){
   let sheetSizes = {
-    "4x6": [mmToPx(101.6), mmToPx(152.4)], // 4x6 inch in px @300dpi
+    "4x6": [mmToPx(101.6), mmToPx(152.4)],
     "a4": [2480, 3508]
   };
   let [sw, sh] = sheetSizes[layoutKey];
@@ -633,7 +666,6 @@ window.download = function(){
   a.click();
 };
 
-// initial blank draw
 draw();
 
 })();
