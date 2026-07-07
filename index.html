@@ -1,0 +1,640 @@
+<div id="pro-passport">
+
+<h2>📸 Passport Photo Maker</h2>
+
+<div class="pp-row">
+  <label class="pp-upload-label" for="upload">📁 Upload Photo</label>
+  <input type="file" id="upload" accept="image/*">
+</div>
+
+<div class="pp-grid">
+
+  <div class="pp-field">
+    <label>Photo Size</label>
+    <select id="size">
+      <option value="1x1">US 1x1 inch (300x300px)</option>
+      <option value="2x2">US Passport/Visa 2x2 inch (600x600px)</option>
+      <option value="35x45">UK/Schengen/EU 35x45mm</option>
+      <option value="51x51">India 51x51mm (2x2 inch)</option>
+      <option value="33x48">China 33x48mm</option>
+      <option value="50x70">Canada 50x70mm</option>
+      <option value="35x45au">Australia 35x45mm</option>
+      <option value="50x50">Generic 50x50mm</option>
+      <option value="custom">Custom Size (mm)</option>
+    </select>
+  </div>
+
+  <div class="pp-field pp-custom-size" id="customSizeBox" style="display:none;">
+    <label>Custom Width x Height (mm)</label>
+    <div class="pp-inline">
+      <input type="number" id="customW" placeholder="Width" min="10" max="300" value="35">
+      <span>x</span>
+      <input type="number" id="customH" placeholder="Height" min="10" max="300" value="45">
+    </div>
+  </div>
+
+  <div class="pp-field">
+    <label>Background Color</label>
+    <div class="pp-inline">
+      <input type="color" id="bg" value="#ffffff">
+      <div class="pp-swatches">
+        <button type="button" class="pp-swatch" style="background:#ffffff" data-color="#ffffff" title="White"></button>
+        <button type="button" class="pp-swatch" style="background:#e9edf5" data-color="#e9edf5" title="Light Grey"></button>
+        <button type="button" class="pp-swatch" style="background:#dbe9ff" data-color="#dbe9ff" title="Light Blue"></button>
+        <button type="button" class="pp-swatch" style="background:#ff0000" data-color="#ff0000" title="Red"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="pp-field">
+    <label>Border Style</label>
+    <select id="border">
+      <option value="0">No Border</option>
+      <option value="5">Thin</option>
+      <option value="10">Medium</option>
+      <option value="20">Thick</option>
+    </select>
+  </div>
+
+  <div class="pp-field">
+    <label>Border Color</label>
+    <input type="color" id="borderColor" value="#000000">
+  </div>
+
+  <div class="pp-field">
+    <label>Face Guide Overlay</label>
+    <select id="guideToggle">
+      <option value="0">Off</option>
+      <option value="1">On (oval face guide)</option>
+    </select>
+  </div>
+
+</div>
+
+<div class="pp-sliders">
+  <label>Brightness <span id="brightVal">100%</span></label>
+  <input type="range" id="bright" min="50" max="150" value="100">
+
+  <label>Contrast <span id="contrastVal">100%</span></label>
+  <input type="range" id="contrast" min="50" max="150" value="100">
+
+  <label>Saturation <span id="satVal">100%</span></label>
+  <input type="range" id="sat" min="50" max="150" value="100">
+
+  <label>Zoom <span id="zoomVal">100%</span></label>
+  <input type="range" id="zoomSlider" min="20" max="300" value="100">
+
+  <label>Eraser Brush Size <span id="brushVal">15px</span></label>
+  <input type="range" id="brushSize" min="5" max="60" value="15">
+</div>
+
+<div class="pp-controls">
+  <button type="button" onclick="rotate(-90)">↺ Rotate Left</button>
+  <button type="button" onclick="rotate(90)">↻ Rotate Right</button>
+  <button type="button" onclick="flipH()">⇋ Flip H</button>
+  <button type="button" onclick="flipV()">⇵ Flip V</button>
+  <button type="button" onclick="toggleErase()" id="eraseBtn">🧽 Eraser: OFF</button>
+  <button type="button" onclick="resetAll()">🔄 Reset</button>
+</div>
+
+<canvas id="canvas"></canvas>
+<p class="pp-hint">Drag the photo to reposition. Use sliders to zoom / adjust. Toggle eraser to manually remove background spots.</p>
+
+<div class="pp-grid">
+  <div class="pp-field">
+    <label>Download Format</label>
+    <select id="format">
+      <option value="png">PNG (best quality)</option>
+      <option value="jpeg">JPEG (smaller size)</option>
+    </select>
+  </div>
+
+  <div class="pp-field">
+    <label>Print Sheet Layout</label>
+    <select id="sheetLayout">
+      <option value="single">Single Photo Only</option>
+      <option value="4x6">4x6 inch Sheet (multiple copies)</option>
+      <option value="a4">A4 Sheet (multiple copies)</option>
+    </select>
+  </div>
+</div>
+
+<div class="pp-controls">
+  <button type="button" onclick="download()" class="pp-primary">⬇️ Download Photo</button>
+</div>
+
+</div>
+
+<style>
+#pro-passport{
+  --pp-accent:#6228e6;
+  --pp-accent-dark:#4b1cb5;
+  --pp-text:#22213a;
+  --pp-bg:#ffffff;
+  background:var(--pp-bg);
+  padding:22px;
+  border-radius:15px;
+  max-width:560px;
+  margin:auto;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+  font-family:sans-serif;
+  text-align:center;
+  box-sizing:border-box;
+}
+#pro-passport *{box-sizing:border-box;}
+
+#pro-passport h2{
+  color:var(--pp-accent);
+  margin:0 0 15px 0;
+  font-size:22px;
+}
+
+#pro-passport label{
+  color:var(--pp-text);
+  font-size:13px;
+  font-weight:600;
+  display:block;
+  margin-bottom:4px;
+  text-align:left;
+}
+
+#pro-passport select,
+#pro-passport input[type="number"]{
+  width:100%;
+  padding:8px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:14px;
+  color:var(--pp-text);
+  background:#fafafa;
+}
+
+#pro-passport input[type="color"]{
+  width:44px;
+  height:36px;
+  border:1px solid #ddd;
+  border-radius:8px;
+  padding:2px;
+  background:#fafafa;
+  cursor:pointer;
+}
+
+#pro-passport input[type="file"]{
+  display:none;
+}
+
+.pp-upload-label{
+  display:inline-block;
+  background:var(--pp-accent);
+  color:#fff !important;
+  padding:10px 18px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:10px;
+}
+.pp-upload-label:hover{background:var(--pp-accent-dark);}
+
+.pp-row{margin-bottom:10px;}
+
+.pp-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:12px;
+  text-align:left;
+}
+
+.pp-field{min-width:0;}
+
+.pp-inline{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.pp-custom-size{grid-column:1 / -1;}
+
+.pp-swatches{
+  display:flex;
+  gap:6px;
+}
+
+.pp-swatch{
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  border:2px solid #ddd;
+  cursor:pointer;
+  padding:0;
+}
+
+.pp-sliders{
+  margin-top:5px;
+  text-align:left;
+}
+.pp-sliders label{
+  font-size:12px;
+  color:#555;
+  margin-top:8px;
+  display:flex;
+  justify-content:space-between;
+}
+.pp-sliders input[type="range"]{
+  width:100%;
+  accent-color:var(--pp-accent);
+}
+
+canvas{
+  width:100%;
+  max-width:100%;
+  height:auto;
+  border:2px dashed #ddd;
+  margin-top:15px;
+  touch-action:none;
+  border-radius:8px;
+  background:#f5f5f5;
+}
+
+.pp-hint{
+  font-size:12px;
+  color:#888;
+  margin:8px 0 0 0;
+}
+
+.pp-controls{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:14px;
+}
+
+#pro-passport button{
+  padding:10px 14px;
+  border:none;
+  background:var(--pp-accent);
+  color:#fff !important;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+  font-weight:600;
+  flex:1 1 auto;
+  min-width:110px;
+  transition:background .15s ease;
+}
+#pro-passport button:hover{background:var(--pp-accent-dark);}
+
+#pro-passport button.pp-primary{
+  background:#0fae5f;
+  min-width:200px;
+}
+#pro-passport button.pp-primary:hover{background:#0c8c4c;}
+
+@media(max-width:600px){
+  .pp-grid{grid-template-columns:1fr;}
+  #pro-passport button{width:100%;}
+}
+</style>
+
+<script>
+(function(){
+
+let canvas = document.getElementById("canvas");
+let ctx = canvas.getContext("2d");
+
+let img = new Image();
+let hasImage = false;
+let scale = 1;
+let rotation = 0;
+let flipXState = 1;
+let flipYState = 1;
+let posX = 0;
+let posY = 0;
+
+let isDragging = false;
+let dragStartX = 0, dragStartY = 0;
+let eraseMode = false;
+
+// eraser strokes stored so they survive redraws (applied after image draw)
+let eraseStrokes = [];
+
+const sizesMM = {
+  "1x1": {w:300, h:300, isPx:true},
+  "2x2": {w:600, h:600, isPx:true},
+  "35x45": {wmm:35, hmm:45},
+  "51x51": {wmm:51, hmm:51},
+  "33x48": {wmm:33, hmm:48},
+  "50x70": {wmm:50, hmm:70},
+  "35x45au": {wmm:35, hmm:45},
+  "50x50": {wmm:50, hmm:50}
+};
+
+function mmToPx(mm){
+  return Math.round((mm/25.4)*300); // 300 DPI
+}
+
+function getCanvasSize(){
+  let sizeKey = document.getElementById("size").value;
+
+  if(sizeKey === "custom"){
+    let w = parseFloat(document.getElementById("customW").value) || 35;
+    let h = parseFloat(document.getElementById("customH").value) || 45;
+    return [mmToPx(w), mmToPx(h)];
+  }
+
+  let s = sizesMM[sizeKey];
+  if(s.isPx) return [s.w, s.h];
+  return [mmToPx(s.wmm), mmToPx(s.hmm)];
+}
+
+document.getElementById("size").onchange = function(){
+  document.getElementById("customSizeBox").style.display =
+    this.value === "custom" ? "block" : "none";
+  draw();
+};
+
+document.getElementById("upload").onchange = e=>{
+  let file = e.target.files[0];
+  if(!file) return;
+  let reader = new FileReader();
+  reader.onload = evt=>{
+    img.src = evt.target.result;
+    img.onload = ()=>{
+      hasImage = true;
+      scale = 1;
+      rotation = 0;
+      flipXState = 1;
+      flipYState = 1;
+      eraseStrokes = [];
+      let [w,h] = getCanvasSize();
+      posX = w/2;
+      posY = h/2;
+      // auto-fit image to cover canvas initially
+      let coverScale = Math.max(w/img.width, h/img.height);
+      scale = coverScale;
+      draw();
+    };
+  };
+  reader.readAsDataURL(file);
+};
+
+function draw(){
+  let [w,h] = getCanvasSize();
+  canvas.width = w;
+  canvas.height = h;
+
+  ctx.save();
+  ctx.fillStyle = document.getElementById("bg").value;
+  ctx.fillRect(0,0,w,h);
+
+  if(hasImage){
+    ctx.filter = `brightness(${document.getElementById("bright").value}%) contrast(${document.getElementById("contrast").value}%) saturate(${document.getElementById("sat").value}%)`;
+
+    let imgW = img.width * scale;
+    let imgH = img.height * scale;
+
+    ctx.save();
+    ctx.translate(posX,posY);
+    ctx.rotate(rotation*Math.PI/180);
+    ctx.scale(flipXState, flipYState);
+    ctx.drawImage(img,-imgW/2,-imgH/2,imgW,imgH);
+    ctx.restore();
+
+    ctx.filter = "none";
+
+    // replay eraser strokes (reveal background color beneath)
+    if(eraseStrokes.length){
+      ctx.save();
+      ctx.fillStyle = document.getElementById("bg").value;
+      eraseStrokes.forEach(pt=>{
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI*2);
+        ctx.fill();
+      });
+      ctx.restore();
+    }
+  } else {
+    ctx.fillStyle = "#aaaaaa";
+    ctx.font = "16px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText("Upload a photo to begin", w/2, h/2);
+  }
+
+  // face guide overlay
+  if(document.getElementById("guideToggle").value === "1"){
+    ctx.save();
+    ctx.strokeStyle = "rgba(98,40,230,0.6)";
+    ctx.lineWidth = Math.max(2, w*0.006);
+    ctx.setLineDash([w*0.02, w*0.015]);
+    ctx.beginPath();
+    ctx.ellipse(w/2, h*0.45, w*0.28, h*0.33, 0, 0, Math.PI*2);
+    ctx.stroke();
+    // shoulder line guide
+    ctx.beginPath();
+    ctx.moveTo(w*0.15, h*0.85);
+    ctx.lineTo(w*0.85, h*0.85);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // border
+  let b = parseInt(document.getElementById("border").value, 10);
+  if(b > 0){
+    ctx.strokeStyle = document.getElementById("borderColor").value;
+    ctx.lineWidth = b;
+    ctx.strokeRect(b/2, b/2, w-b, h-b);
+  }
+
+  ctx.restore();
+}
+
+// ---- pointer helpers (mouse + touch unified) ----
+function getPointerPos(e){
+  let rect = canvas.getBoundingClientRect();
+  let scaleX = canvas.width / rect.width;
+  let scaleY = canvas.height / rect.height;
+  let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+  let clientY = e.touches ? e.touches[0].clientY : e.clientY;
+  return {
+    x: (clientX - rect.left) * scaleX,
+    y: (clientY - rect.top) * scaleY
+  };
+}
+
+function pointerDown(e){
+  if(!hasImage) return;
+  e.preventDefault();
+  let p = getPointerPos(e);
+  if(eraseMode){
+    isDragging = true;
+    eraseAt(p.x, p.y);
+  } else {
+    isDragging = true;
+    dragStartX = p.x - posX;
+    dragStartY = p.y - posY;
+  }
+}
+
+function pointerMove(e){
+  if(!isDragging || !hasImage) return;
+  e.preventDefault();
+  let p = getPointerPos(e);
+  if(eraseMode){
+    eraseAt(p.x, p.y);
+  } else {
+    posX = p.x - dragStartX;
+    posY = p.y - dragStartY;
+    draw();
+  }
+}
+
+function pointerUp(){
+  isDragging = false;
+}
+
+function eraseAt(x,y){
+  let r = parseInt(document.getElementById("brushSize").value, 10);
+  eraseStrokes.push({x,y,r});
+  draw();
+}
+
+canvas.addEventListener("mousedown", pointerDown);
+canvas.addEventListener("mousemove", pointerMove);
+window.addEventListener("mouseup", pointerUp);
+
+canvas.addEventListener("touchstart", pointerDown, {passive:false});
+canvas.addEventListener("touchmove", pointerMove, {passive:false});
+canvas.addEventListener("touchend", pointerUp);
+
+// ---- controls ----
+window.rotate = function(deg){
+  rotation += deg;
+  draw();
+};
+
+window.flipH = function(){
+  flipXState *= -1;
+  draw();
+};
+
+window.flipV = function(){
+  flipYState *= -1;
+  draw();
+};
+
+window.toggleErase = function(){
+  eraseMode = !eraseMode;
+  document.getElementById("eraseBtn").textContent = eraseMode ? "🧽 Eraser: ON" : "🧽 Eraser: OFF";
+};
+
+window.resetAll = function(){
+  scale = 1;
+  rotation = 0;
+  flipXState = 1;
+  flipYState = 1;
+  eraseStrokes = [];
+  eraseMode = false;
+  document.getElementById("eraseBtn").textContent = "🧽 Eraser: OFF";
+  if(hasImage){
+    let [w,h] = getCanvasSize();
+    posX = w/2;
+    posY = h/2;
+    let coverScale = Math.max(w/img.width, h/img.height);
+    scale = coverScale;
+    document.getElementById("zoomSlider").value = 100;
+  }
+  draw();
+};
+
+// zoom slider
+document.getElementById("zoomSlider").oninput = function(){
+  if(!hasImage) return;
+  let [w,h] = getCanvasSize();
+  let baseScale = Math.max(w/img.width, h/img.height);
+  scale = baseScale * (this.value/100);
+  document.getElementById("zoomVal").textContent = this.value + "%";
+  draw();
+};
+
+// live value labels
+document.getElementById("bright").oninput = function(){document.getElementById("brightVal").textContent=this.value+"%"; draw();};
+document.getElementById("contrast").oninput = function(){document.getElementById("contrastVal").textContent=this.value+"%"; draw();};
+document.getElementById("sat").oninput = function(){document.getElementById("satVal").textContent=this.value+"%"; draw();};
+document.getElementById("brushSize").oninput = function(){document.getElementById("brushVal").textContent=this.value+"px";};
+
+// swatches
+document.querySelectorAll(".pp-swatch").forEach(sw=>{
+  sw.onclick = function(){
+    document.getElementById("bg").value = this.dataset.color;
+    draw();
+  };
+});
+
+// general inputs that should redraw
+["bg","border","borderColor","guideToggle","customW","customH"].forEach(id=>{
+  document.getElementById(id).addEventListener("input", draw);
+});
+
+// ---- download / sheet builder ----
+function buildSheet(layoutKey, photoCanvas){
+  let sheetSizes = {
+    "4x6": [mmToPx(101.6), mmToPx(152.4)], // 4x6 inch in px @300dpi
+    "a4": [2480, 3508]
+  };
+  let [sw, sh] = sheetSizes[layoutKey];
+  let sheet = document.createElement("canvas");
+  sheet.width = sw;
+  sheet.height = sh;
+  let sctx = sheet.getContext("2d");
+  sctx.fillStyle = "#ffffff";
+  sctx.fillRect(0,0,sw,sh);
+
+  let pw = photoCanvas.width;
+  let ph = photoCanvas.height;
+  let margin = Math.round(sw*0.02);
+
+  let cols = Math.max(1, Math.floor((sw - margin) / (pw + margin)));
+  let rows = Math.max(1, Math.floor((sh - margin) / (ph + margin)));
+
+  let totalW = cols*pw + (cols-1)*margin;
+  let totalH = rows*ph + (rows-1)*margin;
+  let offsetX = (sw - totalW)/2;
+  let offsetY = (sh - totalH)/2;
+
+  for(let r=0; r<rows; r++){
+    for(let c=0; c<cols; c++){
+      let x = offsetX + c*(pw+margin);
+      let y = offsetY + r*(ph+margin);
+      sctx.drawImage(photoCanvas, x, y, pw, ph);
+    }
+  }
+  return sheet;
+}
+
+window.download = function(){
+  if(!hasImage){
+    alert("Please upload a photo first.");
+    return;
+  }
+  let format = document.getElementById("format").value;
+  let layout = document.getElementById("sheetLayout").value;
+  let mime = format === "jpeg" ? "image/jpeg" : "image/png";
+
+  let outputCanvas = canvas;
+  if(layout !== "single"){
+    outputCanvas = buildSheet(layout, canvas);
+  }
+
+  let a = document.createElement("a");
+  a.href = outputCanvas.toDataURL(mime, 0.95);
+  a.download = "passport-photo." + (format === "jpeg" ? "jpg" : "png");
+  a.click();
+};
+
+// initial blank draw
+draw();
+
+})();
+</script>
